@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <!-- CSS only -->
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="title">
+        <h1>This is your life</h1>
+      </div>
+    </div>
+    <div class="container">
+      <p>
+        When I was a kid, my parents didn’t talk a lot about money. My Mom and
+        Dad both worked normal jobs and I never went without. My Mom encouraged
+        me to pursue a career in medicine as a doctor but I didn’t really give
+        it much thought until college. I knew I liked biology from high school
+        so I decalred a biology major thinking it a good fit for pre-med and
+        began my course work.
+      </p>
+      <p>
+        Pre-med was tough, and not just the course work. It required voluteering
+        for many hours in medical settings with little to no monetary
+        compensation. That was something I just couldn’t do coming from a middle
+        class family and being newly married. I had rent to pay and food to
+        provide. So I threw in the towel to persue a degree in chemistry
+        thinking to be a professor.
+      </p>
+      <p>
+        Around this time my mother's health took a turn for the worse and I
+        realized that right now was not the time that I wanted to head out of
+        state to graduate school. With little prospect of achieving
+        professorship in chemistry by persuing grad school at any of the
+        in-state colleges, I found myself searching for a career to pursue yet
+        again.
+      </p>
+      <p>
+        I happend upon the field of environmental engineering (a sub-domain of
+        civil engineering), heard it payed an salary of $80,000, and involved a
+        fair bit of chemistry. Having no clue what life cost and that being one
+        of the higher salaries I had heard I decided to pursue a master's degree
+        in the subject.
+      </p>
+      <p>
+        Environmental engineering was a good decision looking back. It was
+        rigorous and intruduced me to the skill that got me to my current
+        career. I still remember my first job offer in the field. I was offered
+        $23 per hour. I couldn't believe it. I was raking in the dough.
+      </p>
+      <p>
+        Fast forward 5 years and I was indeed making the $80,000 per year that I
+        had dreamed of with litle prospect of my salary growing much futher than
+        $90,000 in the next 5-10 years. Now don't get me wrong, finacially we
+        were doing okay. We had a house and cars that worked most of the time.
+        But went weren't saving for retirement like we needed to and student
+        loan payments that I knew would crush us were looming on the horizon.
+        With little prospect of a drastically different salary, I began to worry
+        how it was all going to work out.
+      </p>
+      <p>
+        Cutting to the chase, I made a career pivot to data engineering. It was
+        what I actually did for the engineering firms I worked for already so
+        that made the transition easier. With the career change came a higher
+        salary that allowed us to more comfortably meet our financial demands
+        and even check off a few finacial dreams.
+      </p>
+      <p>
+        I find myself often reflecting on my career choices that got me hear,
+        wondering if there was a shorter path. I also am constantly amazed at my
+        lack of knowldge about what life actually costs and how much money some
+        people actually make. I know they say that money can't buy you happiness
+        and I knew my fair share of people who are well off and miserable. But I
+        also can't deny that my neighbors look pretty happy tearing around on
+        their side-by-sides and heading out on the new boat to wakeskating.
+      </p>
+      <p>
+        My purpose in creating this site is a hope that maybe someone younger
+        than I will use it to gain some insight into what life costs, what
+        careers pay enough to deliver the lifestyle they want, and avoid the
+        trap that I fell into of not reconciling income with lifestyle. May you
+        be able to prepare yourself to live out your finacial dreams better than
+        I was prepared is my wish to you all.
+      </p>
+      <p>-A</p>
+    </div>
+    <div class="container">
+      <form>
+        <div class="form-group">
+          <label for="inputIncome">Annual Pre-tax Income in USD</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputIncome"
+            placeholder="Enter income"
+          />
+        </div>
+        <button type="button" class="btn btn-primary" onclick="getMortgage()">
+          Get a life!
+        </button>
+      </form>
+      <div id="maxHomePrice"></div>
+    </div>
+
+    <script>
+      function getMortgage() {
+        const income = document.getElementById("inputIncome").value;
+        const Url = `http://localhost/income/${income}`;
+        fetch(Url, { mode: "cors" })
+          .then((data) => {
+            return data.json();
+          })
+          .then((res) => {
+            appendData(res);
+          })
+          .catch(function (err) {
+            console.log("error: " + err);
+          });
+        function appendData(data) {
+          var mainContainer = document.getElementById("maxHomePrice");
+          console.log(data);
+          var div = document.createElement("div");
+          div.innerText = `The maximum home price you can afford at that salary is: ${data.max_home_price}`;
+          mainContainer.appendChild(div);
+        }
+      }
+    </script>
+  </body>
+</html>
